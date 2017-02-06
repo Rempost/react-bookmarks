@@ -8,7 +8,7 @@ function SearchField({
     onChange = () => void 0
 }) {
     const SearchFieldClass = cn('search-field', classNames, {
-        disabled: 'search-field_disabled'
+        'search-field_disabled': disabled
     });
 
     return (
@@ -24,7 +24,7 @@ function SearchField({
 }
 
 SearchField.propTypes = {
-    classNames: React.PropTypes.array,
+    classNames: React.PropTypes.arrayOf(React.PropTypes.string),
     disabled: React.PropTypes.bool,
     value: React.PropTypes.string,
     onChange: React.PropTypes.func
