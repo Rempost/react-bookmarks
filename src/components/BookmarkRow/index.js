@@ -1,9 +1,8 @@
 import React from 'react';
-import cn from 'classnames';
 
-function BookmarkRow({bookmark, classNames}) {
+function BookmarkRow({bookmark}) {
     return (
-      <tr className={cn('bookmark-row', classNames)}>
+      <tr className="bookmark-row">
           <td className="bookmark-row__column bookmark-row-column">
               <a className="bookmark-row-column__title" href={bookmark.url} target="_blank">{bookmark.title}</a>
           </td>
@@ -12,8 +11,11 @@ function BookmarkRow({bookmark, classNames}) {
 }
 
 BookmarkRow.propTypes = {
-  bookmark: React.PropTypes.shape({
-      title: React.PropTypes.string,
-      url: React.PropTypes.string
-  })
+    bookmark: React.PropTypes.shape({
+        id: React.PropTypes.number,
+        title: React.PropTypes.string,
+        url: React.PropTypes.string
+    })
 };
+
+export default BookmarkRow;
