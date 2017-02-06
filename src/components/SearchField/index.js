@@ -7,19 +7,18 @@ function SearchField({
     value = '',
     onChange = () => void 0
 }) {
-    const SearchFieldClass = cn('search-field', classNames, {
+    const searchFieldClass = cn('search-field', classNames, {
         'search-field_disabled': disabled
     });
 
     return (
       <input
           type="search"
-          className={SearchFieldClass}
+          className={searchFieldClass}
           value={value}
           placeholder="Search"
           disabled={disabled}
-          onChange={(e) => onChange(e)}
-      />
+          onChange={(e) => onChange(e)}/>
     );
 }
 
