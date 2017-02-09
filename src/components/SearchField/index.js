@@ -1,24 +1,33 @@
 import React from 'react';
 import cn from 'classnames';
+import {noop} from '../../utils';
+import _debounce from 'lodash/debounce';
+
 
 function SearchField({
     classNames,
     disabled,
     value = '',
-    onChange = () => void 0
+    onChange = noop
 }) {
     const searchFieldClass = cn('search-field', classNames, {
         'search-field_disabled': disabled
     });
 
+    onChange = _debounce(onChange, 250);
+
+    const onChangeWrap = function(e) {
+        e.persist();
+        onChange(e);
+    };
+
     return (
       <input
           type="search"
           className={searchFieldClass}
-          value={value}
           placeholder="Search"
           disabled={disabled}
-          onChange={(e) => onChange(e)}/>
+          onChange={(e) => onChangeWrap(e)}/>
     );
 }
 

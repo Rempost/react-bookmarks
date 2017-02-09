@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import uuidV1 from 'uuid/v1';
 import BookmarkRow from '../BookmarkRow/index';
 
 function BookmarkTable({bookmarks, classNames}) {
@@ -11,7 +12,7 @@ function BookmarkTable({bookmarks, classNames}) {
             </tr>
           </thead>
           <tbody className="bookmark-table__body bookmark-table-body">
-            {bookmarks.map((bookmark) => <BookmarkRow classNames="bookmark-table-body__row" key={bookmark.id} bookmark={bookmark}/>)}
+            {bookmarks.map((bookmark) => <BookmarkRow classNames="bookmark-table-body__row" key={uuidV1()} bookmark={bookmark}/>)}
           </tbody>
       </table>
     );
