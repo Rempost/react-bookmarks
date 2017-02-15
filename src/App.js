@@ -6,10 +6,10 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filteredBookmarks: []
+            bookmarks: [],
+            searchValue: ''
         };
-        this.bookmarks = [];
-        this.searchValue = '';
+        this.filteredBookmarks = [];
         this.findBookmarks = this.findBookmarks.bind(this);
     }
 
@@ -19,8 +19,8 @@ class App extends Component {
                 return response.json();
             })
             .then((bookmarks) => {
-                this.bookmarks = bookmarks;
-                this.setState({filteredBookmarks: bookmarks});
+                this.filteredBookmarks = bookmarks.slice();
+                this.setState({bookmarks});
             })
             .catch((error) => {
                 console.log(error);
@@ -28,18 +28,18 @@ class App extends Component {
     }
 
     findBookmarks(e) {
-        this.searchValue = e.target.value;
-        let result = this.bookmarks.filter((bookmark) => {
-           return ~bookmark.title.toLowerCase().indexOf(this.searchValue.toLowerCase());
+        let searchValue = e.target.value;
+        this.filteredBookmarks = this.state.bookmarks.filter((bookmark) => {
+           return ~bookmark.title.toLowerCase().indexOf(searchValue.toLowerCase());
         });
-        this.setState({filteredBookmarks: result});
+        this.setState({searchValue});
     }
 
   render() {
     return (
       <div className="App">
-        <SearchField value={this.searchValue} onChange={this.findBookmarks}/>
-        <BookmarkTable bookmarks={this.state.filteredBookmarks}/>
+        <SearchField onChange={this.findBookmarks}/>
+        <BookmarkTable bookmarks={this.filteredBookmarks}/>
       </div>
     );
   }

@@ -7,18 +7,17 @@ import _debounce from 'lodash/debounce';
 function SearchField({
     classNames,
     disabled,
-    value = '',
     onChange = noop
 }) {
     const searchFieldClass = cn('search-field', classNames, {
         'search-field_disabled': disabled
     });
 
-    onChange = _debounce(onChange, 250);
+    let onChangeDebounce = _debounce(onChange, 250);
 
     const onChangeWrap = function(e) {
         e.persist();
-        onChange(e);
+        onChangeDebounce(e);
     };
 
     return (
@@ -34,7 +33,6 @@ function SearchField({
 SearchField.propTypes = {
     classNames: React.PropTypes.arrayOf(React.PropTypes.string),
     disabled: React.PropTypes.bool,
-    value: React.PropTypes.string,
     onChange: React.PropTypes.func
 };
 
